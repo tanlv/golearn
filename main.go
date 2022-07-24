@@ -110,69 +110,81 @@ func showMultiTable() {
 	// Người dùng nhập vào bảng cửu chương muốn xem
 	// Người dùng nhập vào khoảng ranger muốn in
 	// Chương trình in ra từng dòng kết quả
-
-	// Input nhập bản cửu chương cần xem
-	scanner1 := bufio.NewScanner(os.Stdin)
-	// check giá trị đầu vào
 	for {
-		// lấy giá trị
-		fmt.Printf("Nhập vào bảng cửu chương muốn xem: ")
-		scanner1.Scan()
-		input1 := scanner1.Text()
+		fmt.Println("Nhập \"exit\" nếu muốn thoát chương trình")
+		// Input nhập bản cửu chương cần xem
+		scanner1 := bufio.NewScanner(os.Stdin)
+		// check giá trị đầu vào
+		for {
+			// lấy giá trị
+			fmt.Printf("Nhập vào bảng cửu chương muốn xem: ")
+			scanner1.Scan()
+			input1 := scanner1.Text()
 
-		if input1 == "" {
-			continue
+			if input1 == "" {
+				continue
+			}
+
+			if input1 == "exit" {
+				os.Exit(0)
+			}
+
+			// Chuyển string to int
+			number1, err1 = strconv.Atoi(input1)
+
+			if number1 >= 1 && number1 <= 100 {
+				break
+			}
+
+			if err1 != nil {
+				log.Panic(err1)
+			}
+
 		}
 
-		// Chuyển string to int
-		number1, err1 = strconv.Atoi(input1)
+		// Input nhập ranger cần xem
+		scanner2 := bufio.NewScanner(os.Stdin)
 
-		if number1 >= 1 && number1 <= 100 {
-			break
+		// check giá trị đầu vào
+		for {
+			fmt.Printf("Nhập vào khoảng ranger của bảng cửu chương: ")
+			scanner2.Scan()
+			input2 := scanner2.Text()
+			if input2 == "" {
+				continue
+			}
+
+			if input2 == "exit" {
+				os.Exit(0)
+			}
+
+			number2, err2 = strconv.Atoi(input2)
+
+			if number2 >= 1 && number2 <= 20 {
+				break
+			}
+
+			if err2 != nil {
+				log.Panic(err2)
+			}
+
 		}
 
-		if err1 != nil {
-			log.Panic(err1)
+		// In ra màn hình bảng cửu chương
+		fmt.Printf("Bảng Cửu Chương: %d\n", number1)
+		inc := 0
+		for {
+			res := number1 * inc
+			// vòng lặp print bảng cửu chương
+			fmt.Printf("%d x %d = %d\n", number1, inc, res)
+			inc++
+			if inc > number2 {
+				break
+			}
 		}
 
+		fmt.Println("=================================")
 	}
-
-	// Input nhập ranger cần xem
-	scanner2 := bufio.NewScanner(os.Stdin)
-
-	// check giá trị đầu vào
-	for {
-		fmt.Printf("Nhập vào khoảng ranger của bảng cửu chương: ")
-		scanner2.Scan()
-		input2 := scanner2.Text()
-		if input2 == "" {
-			continue
-		}
-		number2, err2 = strconv.Atoi(input2)
-
-		if number2 >= 1 && number2 <= 20 {
-			break
-		}
-
-		if err2 != nil {
-			log.Panic(err2)
-		}
-
-	}
-
-	// In ra màn hình bảng cửu chương
-	fmt.Printf("Bảng Cửu Chương: %d\n", number1)
-	inc := 0
-	for {
-		res := number1 * inc
-		// vòng lặp print bảng cửu chương
-		fmt.Printf("%d x %d = %d\n", number1, inc, res)
-		inc++
-		if inc > number2 {
-			break
-		}
-	}
-
 }
 
 func main() {
