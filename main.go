@@ -166,7 +166,7 @@ func showMultiTable() {
 	for {
 		res := number1 * inc
 		// vòng lặp print bảng cửu chương
-		fmt.Printf("%[1]d x %[2]d = %[3]d\n", number1, inc, res)
+		fmt.Printf("%d x %d = %d\n", number1, inc, res)
 		inc++
 		if inc > number2 {
 			break
